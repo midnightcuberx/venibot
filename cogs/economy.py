@@ -1,8 +1,5 @@
 import discord
-from discord.ext import commands
 import json
-from discord.ext.commands import has_permissions, MissingPermissions
-from discord.ext.commands import Bot
 from discord.ext import commands, tasks
 import asyncio
 import random
