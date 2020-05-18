@@ -4,7 +4,6 @@ import corona_api
 import asyncio
 
 
-#the following code sucks
 def generate_base_embed(embed, data):
     embed.add_field(name="Total cases", value = corona_api.format_number(data.cases))
     embed.add_field(name="New cases today", value = corona_api.format_number(data.today_cases))
@@ -49,13 +48,13 @@ class Coronavirus(commands.Cog):
     async def _jhucsse(self, country, province):
             
     
-        data = await self.corona.get_jhu_csse_data() #get all data from the JHU CSSE
+        data = await self.corona.get_jhu_csse_data()
 
         if country.lower() == 'uk':
-            country = 'united kingdom' #corrections
+            country = 'united kingdom'
 
         relevant = next(cp for cp in data if cp.country_name.lower() == country.lower()\
-            and str(cp.province_name).lower() == province.lower()) #filter data for the relevant province
+            and str(cp.province_name).lower() == province.lower())
         
         embed = discord.Embed(title="Coronavirus (COVID-19) stats", color=65280)
         embed.set_footer(text="These stats are what has been officially confirmed. It is possible that real figures are different.")
@@ -66,7 +65,6 @@ class Coronavirus(commands.Cog):
         embed.add_field(name="Total recoveries", value = corona_api.format_number(relevant.recoveries))
         embed.add_field(name="Active cases", value = corona_api.format_number(relevant.confirmed_cases-relevant.deaths-relevant.recoveries))
         embed.add_field(name="Last updated", value = corona_api.format_date(relevant.updated))
-        #this is different from everything else due to the data the API reports, so we cant use a generic embed builder.
         return embed
 
 
@@ -114,9 +112,9 @@ class Coronavirus(commands.Cog):
             country = 'korea, south' #no stats for north korea
 
         if province:
-            data = await self.corona.get_province_history(country, province, 14) #get the history for the given country with province
+            data = await self.corona.get_province_history(country, province, 14)
         else:
-            data = await self.corona.get_country_history(country, 14) #if no province given, get the data for whole country
+            data = await self.corona.get_country_history(country, 14)
 
         name = data.name
         prov = str(data.province).title()
@@ -127,7 +125,7 @@ class Coronavirus(commands.Cog):
         death_history_value = ''
         recovery_history_value = ''
 
-        for i in range(14): #get the previous 2 weeks
+        for i in range(14):
             case_history_value = "{}\n**{}:** \
                 {}".format(case_history_value, data.case_history[i].date,
                 corona_api.format_number(data.case_history[i].value) if data.case_history[i].value is not None else 'Unknown')
@@ -153,10 +151,9 @@ class Coronavirus(commands.Cog):
         embed = discord.Embed(title="Top 15 cases", description="", color=65280)
         embed.set_footer(text='These stats are what has been officially confirmed. It is possible that real figures are different.')
 
-        for i in range(1,16): #top 15
+        for i in range(1,16): 
             country = data[i-1]
             name = country.name
-            #sometimes the stats are null/None.
             if country.cases is None:
                 cases = 'Unknown'
             else:
