@@ -1,7 +1,6 @@
 import discord
 import random
 from discord.ext import commands, tasks
-import keep_alive
 import gspread
 import corona_api
 from oauth2client.service_account import ServiceAccountCredentials
@@ -237,10 +236,5 @@ async def shutdown_error(ctx,error):
     await ctx.send("Sorry, Only my owner, Venimental#1289 can use this command")
 
 
-
-
-
-
-keep_alive.keep_alive()
 token=os.environ.get("botsecret")
 bot.run(token)
