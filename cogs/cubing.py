@@ -1,8 +1,5 @@
-import discord
-import random
+import discord,random,asyncio,gspread
 from discord.ext import commands, tasks
-import asyncio
-import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from pycubescrambler import nxn,side,bld
 
@@ -152,26 +149,36 @@ class Cubing(commands.Cog):
     elif a == "megaminx" or a == "mega":
       for x in range(b):
         a=side.get_mega()
-        await ctx.send(a)
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
     elif a=="8x8":
       for i in range(b):
         a=nxn.get8()
-        await ctx.send(a)
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
     elif a=="9x9":
       for i in range(b):
         a=nxn.get9()
-        await ctx.send(a)
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
     elif a=="10x10":
       for i in range(b):
         a=nxn.get10()
-        await ctx.send(a)
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
     elif a=="11x11":
       for i in range(b):
         a=nxn.get11()
-        await ctx.send(a)
-    elif a=="20x20":
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
+    elif a=="12x12":
       for i in range(b):
-        a=nxn.get_big_cube(20)
+        a=nxn.get_big_cube(12)
+        embed=discord.Embed(title="",description=a,color=0xffff00)
+        await ctx.send(embed=embed)
+    elif a=="13x13":
+      for i in range(b):
+        a=nxn.get_big_cube(13)
         embed=discord.Embed(title="",description=a,color=0xffff00)
         await ctx.send(embed=embed)
   @commands.command()
