@@ -186,13 +186,14 @@ class Cubing(commands.Cog):
     if size<8:
       await ctx.send("The smallest cube size is 8")
       return
-    else:
+    for i in range(num):
       scram=nxn.get_big_cube(size)
       embed=discord.Embed(title="",description=scram,color=0xffff00)
       try:
         await ctx.send(embed=embed)
       except discord.errors.HTTPException:
         await ctx.send("Sorry I cannot send that scramble because it is too long")
+        return
     
 
 
