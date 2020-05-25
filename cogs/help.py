@@ -19,8 +19,19 @@ class Help(commands.Cog):
       embed.add_field(name="__**Economy**__", value="bal, work, daily, weekly, search, beg, give, lb, rob, gamble, busk, shop, inv, buy, hunt, fish, pm", inline=False)
       embed.add_field(name="__**Maths**__", value="pythag, pi, solvequad, hcf, add, subtract, multiply, divide, degtorad, radtodeg, factorial", inline=False)
       embed.add_field(name="__**COVID-19**__", value="corona, coronatop, cvhistory", inline=False)
+      embed.add_field(name="__**COMPS**__",value="comp, view, submit, compconfig, podiums, compban, compunban, reset",inline=False)
       await ctx.author.send(embed=embed)
-
+    
+    elif a.lower()=="comps":
+      embed = discord.Embed(title="__**Comp commands**__", description="helpful commands", color=0xeee657)
+      embed.add_field(name="+comp",value="Generates scrambles for a weekily comp.",inline=False)
+      embed.add_field(name="+submit <event> <single> <average>",value="submits your times for an event. make sure you submit an average and a single.",inline=False)
+      embed.add_field(name="+compconfig <event>",value="toggles an event on or off",inline=False)
+      embed.add_field(name="+podiums",value="Does the podiums and resets all the results. Will also calculate the overall winner",inline=False)
+      embed.add_field(name="+compban <user>",value="Bans a user from the weekly comp",inline=False)
+      embed.add_field(name="+compunban <user>",value="Unbans a user from the weekly comp",inline=False)
+      embed.add_field(name="+reset <event><user>",value="Resets the reults of an event for a user.",inline=False)
+      embed.add_field(name="+events",value="Shows what events are Enabled/disabled",inline=False)
     elif a.lower()=="utility":
       embed = discord.Embed(title="__**Utility commands**__", description="helpful commands", color=0xeee657)
       embed.add_field(name="+info", value="Gives this message", inline=False)
@@ -32,6 +43,7 @@ class Help(commands.Cog):
       embed.add_field(name="+send <message>", value="sends a message to my owner", inline=False)
       embed.add_field(name="+avatar ", value="shows your avatar", inline=False)
       embed.add_field(name="+userinfo <user> ", value="shows the info on a user", inline=False)
+      embed.add_field(name="+translate <language> <text>", value="translates stuff", inline=False)
       await ctx.author.send(embed=embed)
 
     elif a.lower()=="cubing":
