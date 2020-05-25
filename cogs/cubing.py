@@ -1,8 +1,14 @@
-import discord,random,asyncio,gspread
+import discord,random,asyncio,gspread,os,pymongo,dns
 from discord.ext import commands, tasks
 from oauth2client.service_account import ServiceAccountCredentials
 from pycubescrambler import nxn,side,bld
 
+
+
+mongosecret=os.environ.get("mongosecret")
+client = pymongo.MongoClient(mongosecret)
+db = client["scrambles"]
+collection=db["4x4"]
 
 scope = ['https://spreadsheets.google.com/feeds',
         'https://www.googleapis.com/auth/drive']
@@ -151,6 +157,20 @@ class Cubing(commands.Cog):
         a=side.get_mega()
         embed=discord.Embed(title="",description=a,color=0xffff00)
         await ctx.send(embed=embed)
+    elif a=="4x4":
+      for i in range(b):
+        list1=[]
+        results=collection.find({})
+        
+        scramble=results[0]["scramble"]
+        embed=discord.Embed(title="",description=scramble,color=0xffff00)
+        await ctx.send(embed=embed)
+        scram=collection.find({"scramble":scramble})
+        list2=[]
+        for result in scram:
+          list2.append(result["_id"])
+        collection.delete_one({"_id":list2[-1],"scramble":scramble})
+        
     elif a=="8x8":
       for i in range(b):
         a=nxn.get8()
